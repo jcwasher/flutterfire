@@ -547,11 +547,15 @@ abstract class Settings {
   //ignore: avoid_setters_without_getters
   external set ignoreUndefinedProperties(bool u);
 
+  //ignore: avoid_setters_without_getters
+  external set experimentalForceLongPolling(bool t);
+
   external factory Settings({
     int? cacheSizeBytes,
     String? host,
     bool? ssl,
     bool? ignoreUndefinedProperties,
+    bool? experimentalForceLongPolling,
   });
 }
 
