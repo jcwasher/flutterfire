@@ -145,12 +145,16 @@ class FirebaseFirestoreWeb extends FirebaseFirestorePlatform {
         ssl: settings.sslEnabled,
         ignoreUndefinedProperties: settings.ignoreUndefinedProperties,
         experimentalForceLongPolling: settings.experimentalForceLongPolling,
+        experimentalAutoDetectLongPolling:
+            settings.experimentalAutoDetectLongPolling,
       );
     } else {
       _settings = firestore_interop.Settings(
         cacheSizeBytes: cacheSizeBytes,
         ignoreUndefinedProperties: settings.ignoreUndefinedProperties,
         experimentalForceLongPolling: settings.experimentalForceLongPolling,
+        experimentalAutoDetectLongPolling:
+            settings.experimentalAutoDetectLongPolling,
       );
     }
   }

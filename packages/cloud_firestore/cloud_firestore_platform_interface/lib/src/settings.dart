@@ -18,6 +18,7 @@ class Settings {
     this.cacheSizeBytes,
     this.ignoreUndefinedProperties = false,
     this.experimentalForceLongPolling = false,
+    this.experimentalAutoDetectLongPolling = false,
   });
 
   /// Constant used to indicate the LRU garbage collection should be disabled.
@@ -65,6 +66,12 @@ class Settings {
   /// Web only.
   final bool experimentalForceLongPolling;
 
+  /// Configures the SDK's underlying transport (WebChannel) to automatically detect if long-polling should be used.
+  /// This is very similar to experimentalForceLongPolling, but only uses long-polling if required.
+  ///
+  /// This setting will likely be enabled by default in future releases and cannot be combined with experimentalForceLongPolling.
+  final bool experimentalAutoDetectLongPolling;
+
   /// Returns the settings as a [Map]
   Map<String, dynamic> get asMap {
     return {
@@ -74,6 +81,8 @@ class Settings {
       'cacheSizeBytes': cacheSizeBytes,
       if (kIsWeb) 'ignoreUndefinedProperties': ignoreUndefinedProperties,
       if (kIsWeb) 'experimentalForceLongPolling': experimentalForceLongPolling,
+      if (kIsWeb)
+        'experimentalAutoDetectLongPolling': experimentalAutoDetectLongPolling,
     };
   }
 
@@ -84,6 +93,7 @@ class Settings {
     int? cacheSizeBytes,
     bool? ignoreUndefinedProperties,
     bool? experimentalForceLongPolling,
+    bool? experimentalAutoDetectLongPolling,
   }) =>
       Settings(
         persistenceEnabled: persistenceEnabled ?? this.persistenceEnabled,
@@ -94,6 +104,8 @@ class Settings {
             ignoreUndefinedProperties ?? this.ignoreUndefinedProperties,
         experimentalForceLongPolling:
             experimentalForceLongPolling ?? this.experimentalForceLongPolling,
+        experimentalAutoDetectLongPolling: experimentalAutoDetectLongPolling ??
+            this.experimentalAutoDetectLongPolling,
       );
 
   @override
@@ -105,7 +117,9 @@ class Settings {
       other.sslEnabled == sslEnabled &&
       other.cacheSizeBytes == cacheSizeBytes &&
       other.ignoreUndefinedProperties == ignoreUndefinedProperties &&
-      other.experimentalForceLongPolling == experimentalForceLongPolling;
+      other.experimentalForceLongPolling == experimentalForceLongPolling &&
+      other.experimentalAutoDetectLongPolling ==
+          experimentalAutoDetectLongPolling;
 
   @override
   int get hashCode => Object.hash(
@@ -116,6 +130,7 @@ class Settings {
         cacheSizeBytes,
         ignoreUndefinedProperties,
         experimentalForceLongPolling,
+        experimentalAutoDetectLongPolling,
       );
 
   @override

@@ -550,12 +550,16 @@ abstract class Settings {
   //ignore: avoid_setters_without_getters
   external set experimentalForceLongPolling(bool t);
 
+  //ignore: avoid_setters_without_getters
+  external set experimentalAutoDetectLongPolling(bool t);
+
   external factory Settings({
     int? cacheSizeBytes,
     String? host,
     bool? ssl,
     bool? ignoreUndefinedProperties,
     bool? experimentalForceLongPolling,
+    bool? experimentalAutoDetectLongPolling,
   });
 }
 
