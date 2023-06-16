@@ -17,6 +17,8 @@ class Settings {
     this.sslEnabled,
     this.cacheSizeBytes,
     this.ignoreUndefinedProperties = false,
+    this.experimentalForceLongPolling = false,
+    this.experimentalAutoDetectLongPolling = false,
   });
 
   /// Constant used to indicate the LRU garbage collection should be disabled.
@@ -52,6 +54,24 @@ class Settings {
   /// Web only.
   final bool ignoreUndefinedProperties;
 
+  /// Forces the SDK’s underlying network transport (WebChannel) to use long-polling.
+  /// Each response from the backend will be closed immediately after the backend sends
+  /// data (by default responses are kept open in case the backend has more data to send).
+  /// This avoids incompatibility issues with certain proxies, antivirus software, etc. that
+  /// incorrectly buffer traffic indefinitely. Use of this option will cause some performance degradation though.
+  ///
+  /// This setting cannot be used with experimentalAutoDetectLongPolling and may be removed in a future release.
+  /// If you find yourself using it to work around a specific network reliability issue, please tell us about it in
+  /// https://github.com/firebase/firebase-js-sdk/issues/1674.
+  /// Web only.
+  final bool experimentalForceLongPolling;
+
+  /// Configures the SDK's underlying transport (WebChannel) to automatically detect if long-polling should be used.
+  /// This is very similar to experimentalForceLongPolling, but only uses long-polling if required.
+  ///
+  /// This setting will likely be enabled by default in future releases and cannot be combined with experimentalForceLongPolling.
+  final bool experimentalAutoDetectLongPolling;
+
   /// Returns the settings as a [Map]
   Map<String, dynamic> get asMap {
     return {
@@ -60,6 +80,9 @@ class Settings {
       'sslEnabled': sslEnabled,
       'cacheSizeBytes': cacheSizeBytes,
       if (kIsWeb) 'ignoreUndefinedProperties': ignoreUndefinedProperties,
+      if (kIsWeb) 'experimentalForceLongPolling': experimentalForceLongPolling,
+      if (kIsWeb)
+        'experimentalAutoDetectLongPolling': experimentalAutoDetectLongPolling,
     };
   }
 
@@ -69,6 +92,8 @@ class Settings {
     bool? sslEnabled,
     int? cacheSizeBytes,
     bool? ignoreUndefinedProperties,
+    bool? experimentalForceLongPolling,
+    bool? experimentalAutoDetectLongPolling,
   }) =>
       Settings(
         persistenceEnabled: persistenceEnabled ?? this.persistenceEnabled,
@@ -77,6 +102,10 @@ class Settings {
         cacheSizeBytes: cacheSizeBytes ?? this.cacheSizeBytes,
         ignoreUndefinedProperties:
             ignoreUndefinedProperties ?? this.ignoreUndefinedProperties,
+        experimentalForceLongPolling:
+            experimentalForceLongPolling ?? this.experimentalForceLongPolling,
+        experimentalAutoDetectLongPolling: experimentalAutoDetectLongPolling ??
+            this.experimentalAutoDetectLongPolling,
       );
 
   @override
@@ -87,7 +116,10 @@ class Settings {
       other.host == host &&
       other.sslEnabled == sslEnabled &&
       other.cacheSizeBytes == cacheSizeBytes &&
-      other.ignoreUndefinedProperties == ignoreUndefinedProperties;
+      other.ignoreUndefinedProperties == ignoreUndefinedProperties &&
+      other.experimentalForceLongPolling == experimentalForceLongPolling &&
+      other.experimentalAutoDetectLongPolling ==
+          experimentalAutoDetectLongPolling;
 
   @override
   int get hashCode => Object.hash(
@@ -97,6 +129,8 @@ class Settings {
         sslEnabled,
         cacheSizeBytes,
         ignoreUndefinedProperties,
+        experimentalForceLongPolling,
+        experimentalAutoDetectLongPolling,
       );
 
   @override
