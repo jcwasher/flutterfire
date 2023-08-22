@@ -16,13 +16,6 @@ command:
     # Additionally build a changelog at the root of the workspace.
     workspaceChangelog: true
 
-    changelogs:
-      - path: firebase_ui_changelog.md
-        packageFilters:
-          scope: firebase_ui_*
-        description: |
-          All notable changes for firebase_ui packages
-
   bootstrap:
     # It seems so that running "pub get" in parallel has some issues (like
     # https://github.com/dart-lang/pub/issues/3404). Disabling this feature
@@ -58,9 +51,10 @@ scripts:
       dart pub global run flutter_plugin_tools format && \
       swiftformat .
     description: |
-      Build a specific example app for Android.
-       - Requires `flutter_plugin_tools` (`dart pub global activate flutter_plugin_tools`).
-       - Requires `clang-format` (can be installed via Brew on macOS).
+      Formats the code of all packages (Java, Objective-C, and Dart).
+       - Requires `flutter_plugin_tools` (`pub global activate flutter_plugin_tools`).
+       - Requires `git`.
+       - Requires `clang-format` (can be installed via Brew on MacOS).
        - Requires `swiftformat` (can be installed via Brew on macOS).
 
   build:all:
@@ -166,7 +160,7 @@ scripts:
   test:e2e:cloud_firestore:
     run: |
       cd packages/cloud_firestore/cloud_firestore/example
-      flutter test integration_test/cloud_firestore_e2e_test.dart
+      flutter test integration_test/e2e_test.dart
     description: |
       Run all e2e tests for cloud_firestore.
 
@@ -222,14 +216,14 @@ scripts:
       melos run generate:pigeon:macos --no-select && \
       melos run format --no-select
     packageFilters:
-      file-exists: 'pigeons/messages.dart'
+      fileExists: 'pigeons/messages.dart'
     description: Generate the pigeon messages for all the supported packages.
 
   generate:pigeon:macos:
     run: |
       melos exec -- "sed -i '' 's;#import <Flutter/Flutter.h>;#if TARGET_OS_OSX\n#import <FlutterMacOS/FlutterMacOS.h>\n#else\n#import <Flutter/Flutter.h>\n#endif;g' ios/Classes/messages.g.m"
     packageFilters:
-      file-exists: 'ios/Classes/messages.g.m'
+      fileExists: 'ios/Classes/messages.g.m'
     description: Pigeon does not add the condition to import Flutter or FlutterMacOs. Add the condition
 
   odm:test:
