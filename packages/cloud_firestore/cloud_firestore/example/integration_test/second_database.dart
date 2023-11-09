@@ -1,7 +1,7 @@
 // Copyright 2020, the Chromium project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
-
+import 'dart:io';
 import 'dart:async';
 import 'dart:math';
 
@@ -9,6 +9,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+String getCurrentPlatform() {
+  if (kIsWeb) {
+    return 'web';
+  } else if (Platform.isAndroid) {
+    return 'android';
+  } else if (Platform.isIOS) {
+    return 'ios';
+  } else if (Platform.isMacOS) {
+    return 'macos';
+  } else if (Platform.isWindows) {
+    return 'windows';
+  } else {
+    return 'unknown';
+  }
+}
 
 void runSecondDatabaseTests() {
   group('Second Database', () {
@@ -26,8 +42,11 @@ void runSecondDatabaseTests() {
     ) async {
       // Pushed rules which only allow database "flutterfire-2" to have "flutterfire-2" collection writes
       String collectionForSecondDatabase = 'flutterfire-2';
+
       CollectionReference<Map<String, dynamic>> collection =
-          firestore.collection('$collectionForSecondDatabase/$id/query-tests');
+          firestore.collection(
+        '$collectionForSecondDatabase/$id/${getCurrentPlatform()}',
+      );
       QuerySnapshot<Map<String, dynamic>> snapshot = await collection.get();
 
       await Future.forEach(snapshot.docs,
@@ -330,15 +349,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -364,15 +383,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -398,15 +417,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -431,13 +450,13 @@ void runSecondDatabaseTests() {
             await initializeTest('endAt-document');
         await Future.wait([
           collection.doc('doc1').set({
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
           collection.doc('doc2').set({
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
         ]);
 
@@ -458,16 +477,16 @@ void runSecondDatabaseTests() {
             await initializeTest('endAt-document');
         await Future.wait([
           collection.doc('doc1').set({
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
           collection.doc('doc4').set({
-            'bar': {'value': 4}
+            'bar': {'value': 4},
           }),
         ]);
 
@@ -494,15 +513,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -528,15 +547,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -562,15 +581,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -597,13 +616,13 @@ void runSecondDatabaseTests() {
             await initializeTest('startAt-document-field-value');
         await Future.wait([
           collection.doc('doc1').set({
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
           collection.doc('doc2').set({
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
         ]);
 
@@ -624,16 +643,16 @@ void runSecondDatabaseTests() {
             await initializeTest('startAt-document');
         await Future.wait([
           collection.doc('doc1').set({
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
           collection.doc('doc4').set({
-            'bar': {'value': 4}
+            'bar': {'value': 4},
           }),
         ]);
 
@@ -659,15 +678,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -693,15 +712,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -727,15 +746,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -762,13 +781,13 @@ void runSecondDatabaseTests() {
             await initializeTest('endBefore-document-field-value');
         await Future.wait([
           collection.doc('doc1').set({
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
           collection.doc('doc2').set({
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
         ]);
 
@@ -789,16 +808,16 @@ void runSecondDatabaseTests() {
             await initializeTest('endBefore-document');
         await Future.wait([
           collection.doc('doc1').set({
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
           collection.doc('doc4').set({
-            'bar': {'value': 4}
+            'bar': {'value': 4},
           }),
         ]);
 
@@ -824,15 +843,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -858,15 +877,15 @@ void runSecondDatabaseTests() {
         await Future.wait([
           collection.doc('doc1').set({
             'foo': 1,
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
             'foo': 2,
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
             'foo': 3,
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
         ]);
 
@@ -893,13 +912,13 @@ void runSecondDatabaseTests() {
             await initializeTest('startAfter-document-field-value');
         await Future.wait([
           collection.doc('doc1').set({
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
           collection.doc('doc2').set({
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
         ]);
 
@@ -921,16 +940,16 @@ void runSecondDatabaseTests() {
             await initializeTest('startAfter-document');
         await Future.wait([
           collection.doc('doc1').set({
-            'bar': {'value': 1}
+            'bar': {'value': 1},
           }),
           collection.doc('doc2').set({
-            'bar': {'value': 2}
+            'bar': {'value': 2},
           }),
           collection.doc('doc3').set({
-            'bar': {'value': 3}
+            'bar': {'value': 3},
           }),
           collection.doc('doc4').set({
-            'bar': {'value': 4}
+            'bar': {'value': 4},
           }),
         ]);
 
@@ -1674,7 +1693,7 @@ void runSecondDatabaseTests() {
           collection.doc('doc1').set({
             'nested': {
               'foo.bar@gmail.com': true,
-            }
+            },
           }),
           collection.doc('doc2').set({
             'nested': {
@@ -1685,7 +1704,7 @@ void runSecondDatabaseTests() {
           collection.doc('doc3').set({
             'nested': {
               'foo.bar@gmail.com': false,
-            }
+            },
           }),
         ]);
 
@@ -1734,7 +1753,7 @@ void runSecondDatabaseTests() {
           }),
           collection.add({
             'foo': 'foo/bar',
-          })
+          }),
         ]);
 
         QuerySnapshot<Map<String, dynamic>> snapshot = await collection
@@ -1794,8 +1813,13 @@ void runSecondDatabaseTests() {
                 .get();
           } catch (e) {
             expect(
-              (e as FirebaseException).message,
-              contains('An error occurred while parsing query arguments'),
+              (e as FirebaseException)
+                      .message!
+                      .contains('Client specified an invalid argument.') ||
+                  e.message!.contains(
+                    'An error occurred while parsing query arguments',
+                  ),
+              isTrue,
             );
             expect(e, isA<FirebaseException>());
           }
@@ -1857,10 +1881,13 @@ void runSecondDatabaseTests() {
                 .get();
           } catch (e) {
             expect(
-              (e as FirebaseException).message,
-              contains(
-                'An error occurred while parsing query arguments',
-              ),
+              (e as FirebaseException)
+                      .message!
+                      .contains('Client specified an invalid argument.') ||
+                  e.message!.contains(
+                    'An error occurred while parsing query arguments',
+                  ),
+              isTrue,
             );
             expect(e, isA<FirebaseException>());
           }
@@ -1992,13 +2019,13 @@ void runSecondDatabaseTests() {
             await initializeTest('where-filter-arraycontains');
         await Future.wait([
           collection.doc('doc1').set({
-            'value': [1, 2, 3]
+            'value': [1, 2, 3],
           }),
           collection.doc('doc2').set({
-            'value': [1, 4, 5]
+            'value': [1, 4, 5],
           }),
           collection.doc('doc3').set({
-            'value': [6, 7, 8]
+            'value': [6, 7, 8],
           }),
         ]);
 
@@ -2018,13 +2045,13 @@ void runSecondDatabaseTests() {
             await initializeTest('where-filter-arraycontainsany');
         await Future.wait([
           collection.doc('doc1').set({
-            'value': [1, 2, 3]
+            'value': [1, 2, 3],
           }),
           collection.doc('doc2').set({
-            'value': [1, 4, 5]
+            'value': [1, 4, 5],
           }),
           collection.doc('doc3').set({
-            'value': [6, 7, 8]
+            'value': [6, 7, 8],
           }),
         ]);
 
@@ -2366,7 +2393,8 @@ void runSecondDatabaseTests() {
             snapshot,
             emits(
               isA<QuerySnapshot<int>>().having((e) => e.docs, 'docs', [
-                isA<DocumentSnapshot<int>>().having((e) => e.data(), 'data', 42)
+                isA<DocumentSnapshot<int>>()
+                    .having((e) => e.data(), 'data', 42),
               ]),
             ),
           );
@@ -2384,7 +2412,7 @@ void runSecondDatabaseTests() {
                     isA<DocumentSnapshot<int>>()
                         .having((e) => e.data(), 'data', 42),
                     isA<DocumentSnapshot<int>>()
-                        .having((e) => e.data(), 'data', 21)
+                        .having((e) => e.data(), 'data', 21),
                   ],
                 ),
               ),
@@ -2416,7 +2444,8 @@ void runSecondDatabaseTests() {
             snapshot,
             emits(
               isA<QuerySnapshot<int>>().having((e) => e.docs, 'docs', [
-                isA<DocumentSnapshot<int>>().having((e) => e.data(), 'data', 42)
+                isA<DocumentSnapshot<int>>()
+                    .having((e) => e.data(), 'data', 42),
               ]),
             ),
           );
@@ -2434,7 +2463,7 @@ void runSecondDatabaseTests() {
                     isA<DocumentSnapshot<int>>()
                         .having((e) => e.data(), 'data', 42),
                     isA<DocumentSnapshot<int>>()
-                        .having((e) => e.data(), 'data', 21)
+                        .having((e) => e.data(), 'data', 21),
                   ],
                 ),
               ),
@@ -2464,7 +2493,8 @@ void runSecondDatabaseTests() {
             snapshot,
             emits(
               isA<QuerySnapshot<int>>().having((e) => e.docs, 'docs', [
-                isA<DocumentSnapshot<int>>().having((e) => e.data(), 'data', 42)
+                isA<DocumentSnapshot<int>>()
+                    .having((e) => e.data(), 'data', 42),
               ]),
             ),
           );
@@ -2481,7 +2511,7 @@ void runSecondDatabaseTests() {
                   isA<DocumentSnapshot<int>>()
                       .having((e) => e.data(), 'data', 42),
                   isA<DocumentSnapshot<int>>()
-                      .having((e) => e.data(), 'data', 21)
+                      .having((e) => e.data(), 'data', 21),
                 ]),
               ),
             ),
@@ -2531,7 +2561,7 @@ void runSecondDatabaseTests() {
             await converted.orderBy('value').get().then((d) => d.docs),
             [
               isA<DocumentSnapshot<int>>().having((e) => e.data(), 'data', 21),
-              isA<DocumentSnapshot<int>>().having((e) => e.data(), 'data', 42)
+              isA<DocumentSnapshot<int>>().having((e) => e.data(), 'data', 42),
             ],
           );
         },
@@ -2901,7 +2931,7 @@ void runSecondDatabaseTests() {
 
           await Future.wait([
             collection.add({'foo': 'bar'}),
-            collection.add({'bar': 'baz'})
+            collection.add({'bar': 'baz'}),
           ]);
 
           AggregateQuery query = collection.count();
@@ -2922,7 +2952,7 @@ void runSecondDatabaseTests() {
 
           await Future.wait([
             collection.add({'foo': 'bar'}),
-            collection.add({'foo': 'baz'})
+            collection.add({'foo': 'baz'}),
           ]);
 
           AggregateQuery query =
