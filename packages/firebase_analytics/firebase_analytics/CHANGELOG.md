@@ -1,3 +1,48 @@
+## 10.8.5
+
+ - Update a dependency to the latest release.
+
+## 10.8.4
+
+ - Update a dependency to the latest release.
+
+## 10.8.3
+
+ - Update a dependency to the latest release.
+
+## 10.8.2
+
+ - Update a dependency to the latest release.
+
+## 10.8.1
+
+ - **FIX**(analytics): `setCurrentScreen()` was deprecated, using `logScreenView()` instead ([#12085](https://github.com/firebase/flutterfire/issues/12085)). ([c6341b92](https://github.com/firebase/flutterfire/commit/c6341b92209d6ac80733eb7bfdbac679f44306ec))
+ - **DOCS**: change old documentation links of packages in README files ([#12136](https://github.com/firebase/flutterfire/issues/12136)). ([24b9ac7e](https://github.com/firebase/flutterfire/commit/24b9ac7ec29fc9ca466c0941c2cff26d75b8568d))
+
+## 10.8.0
+
+ - **FEAT**(analytics,ios): add support for initiateOnDeviceConversionMeasurement using email address or phone number ([#11926](https://github.com/firebase/flutterfire/issues/11926)). ([9bc83f1e](https://github.com/firebase/flutterfire/commit/9bc83f1e6770d263092f6367ca3cfe46a83bb1b1))
+
+## 10.7.4
+
+ - Update a dependency to the latest release.
+
+## 10.7.3
+
+ - **FIX**(analytics): fix the toString method on AnalyticsEventItem to print out its content ([#11977](https://github.com/firebase/flutterfire/issues/11977)). ([5fe96ece](https://github.com/firebase/flutterfire/commit/5fe96ece22847e29d2007afe2f6b85b3d6ce4b94))
+
+## 10.7.2
+
+ - Update a dependency to the latest release.
+
+## 10.7.1
+
+ - Update a dependency to the latest release.
+
+## 10.7.0
+
+ - **FEAT**(firebase_analytics): allow custom parameters (strings and numbers) for events and event items ([#11030](https://github.com/firebase/flutterfire/issues/11030)). ([81dfec93](https://github.com/firebase/flutterfire/commit/81dfec93bcc9490f84fd1e8e3e1bc3737f5eed43))
+
 ## 10.6.4
 
  - Update a dependency to the latest release.

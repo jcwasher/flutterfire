@@ -157,6 +157,8 @@ PigeonUserInfo FirebaseAuthPlugin::ParseUserInfo(
   result.set_photo_url(user->photo_url());
   result.set_provider_id(user->provider_id());
   result.set_uid(user->uid());
+  result.set_creation_timestamp(user->metadata().creation_timestamp);
+  result.set_last_sign_in_timestamp(user->metadata().last_sign_in_timestamp);
 
   return result;
 }
@@ -585,11 +587,11 @@ firebase::auth::Credential getCredentialFromArguments(
     flutter::EncodableMap arguments, const AuthPigeonFirebaseApp& app) {
   std::string signInMethod =
       std::get<std::string>(arguments[kArgumentSignInMethod]);
-  std::string secret = std::get<std::string>(arguments[kArgumentSecret]);
 
   // Password Auth
   if (signInMethod == kSignInMethodPassword) {
     std::string email = std::get<std::string>(arguments[kArgumentEmail]);
+    std::string secret = std::get<std::string>(arguments[kArgumentSecret]);
     return firebase::auth::EmailAuthProvider::GetCredential(email.c_str(),
                                                             secret.c_str());
   }
@@ -606,7 +608,6 @@ firebase::auth::Credential getCredentialFromArguments(
   std::string idToken = std::get<std::string>(arguments[kArgumentIdToken]);
   std::string accessToken =
       std::get<std::string>(arguments[kArgumentAccessToken]);
-  std::string rawNonce = std::get<std::string>(arguments[kArgumentRawNonce]);
 
   // Facebook Auth
   if (signInMethod == kSignInMethodFacebook) {
@@ -622,6 +623,7 @@ firebase::auth::Credential getCredentialFromArguments(
 
   // Twitter Auth
   if (signInMethod == kSignInMethodTwitter) {
+    std::string secret = std::get<std::string>(arguments[kArgumentSecret]);
     return firebase::auth::TwitterAuthProvider::GetCredential(idToken.c_str(),
                                                               secret.c_str());
   }

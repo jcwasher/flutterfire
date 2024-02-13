@@ -1,3 +1,48 @@
+## 14.7.15
+
+ - Update a dependency to the latest release.
+
+## 14.7.14
+
+ - Update a dependency to the latest release.
+
+## 14.7.13
+
+ - Update a dependency to the latest release.
+
+## 14.7.12
+
+ - Update a dependency to the latest release.
+
+## 14.7.11
+
+ - **DOCS**: change old documentation links of packages in README files ([#12136](https://github.com/firebase/flutterfire/issues/12136)). ([24b9ac7e](https://github.com/firebase/flutterfire/commit/24b9ac7ec29fc9ca466c0941c2cff26d75b8568d))
+
+## 14.7.10
+
+ - **FIX**(messaging,android): increase notification storage limit to `100` ([#12060](https://github.com/firebase/flutterfire/issues/12060)). ([2718db66](https://github.com/firebase/flutterfire/commit/2718db663e61ecb2fd4333553a17ebb217e77330))
+ - **FIX**(messaging,android): possible fix to a crash occurring on android background executor ([#12057](https://github.com/firebase/flutterfire/issues/12057)). ([3eaae47f](https://github.com/firebase/flutterfire/commit/3eaae47faccf38fc5f3ec52a753858780a0e5efc))
+
+## 14.7.9
+
+ - **FIX**(messaging): expose the missing WebNotification object ([#11991](https://github.com/firebase/flutterfire/issues/11991)). ([9f4529e3](https://github.com/firebase/flutterfire/commit/9f4529e39cc707f321c6f765835f038165ff785f))
+
+## 14.7.8
+
+ - Update a dependency to the latest release.
+
+## 14.7.7
+
+ - Update a dependency to the latest release.
+
+## 14.7.6
+
+ - Update a dependency to the latest release.
+
+## 14.7.5
+
+ - Update a dependency to the latest release.
+
 ## 14.7.4
 
  - Update a dependency to the latest release.

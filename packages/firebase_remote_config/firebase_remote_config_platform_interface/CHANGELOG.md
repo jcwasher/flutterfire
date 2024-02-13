@@ -1,3 +1,39 @@
+## 1.4.21
+
+ - Update a dependency to the latest release.
+
+## 1.4.20
+
+ - Update a dependency to the latest release.
+
+## 1.4.19
+
+ - Update a dependency to the latest release.
+
+## 1.4.18
+
+ - Update a dependency to the latest release.
+
+## 1.4.17
+
+ - Update a dependency to the latest release.
+
+## 1.4.16
+
+ - Update a dependency to the latest release.
+
+## 1.4.15
+
+ - Update a dependency to the latest release.
+
+## 1.4.14
+
+ - Update a dependency to the latest release.
+
+## 1.4.13
+
+ - Update a dependency to the latest release.
+
 ## 1.4.12
 
  - Update a dependency to the latest release.

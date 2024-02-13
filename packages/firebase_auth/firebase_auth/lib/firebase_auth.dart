@@ -5,6 +5,7 @@
 library firebase_auth;
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,6 +39,10 @@ export 'package:firebase_auth_platform_interface/firebase_auth_platform_interfac
         EmailAuthCredential,
         FacebookAuthProvider,
         FacebookAuthCredential,
+        GameCenterAuthProvider,
+        GameCenterAuthCredential,
+        PlayGamesAuthProvider,
+        PlayGamesAuthCredential,
         GithubAuthProvider,
         GithubAuthCredential,
         GoogleAuthProvider,

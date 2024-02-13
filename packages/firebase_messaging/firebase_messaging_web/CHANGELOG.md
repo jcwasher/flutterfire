@@ -1,3 +1,44 @@
+## 3.6.4
+
+ - Update a dependency to the latest release.
+
+## 3.6.3
+
+ - Update a dependency to the latest release.
+
+## 3.6.2
+
+ - Update a dependency to the latest release.
+
+## 3.6.1
+
+ - Update a dependency to the latest release.
+
+## 3.6.0
+
+ - **FEAT**(messaging,web): migrate web to js_interop to be compatible with WASM ([#12223](https://github.com/firebase/flutterfire/issues/12223)). ([6ada2379](https://github.com/firebase/flutterfire/commit/6ada2379f22be7051364670471244330f2528bcb))
+ - **DOCS**: change old documentation links of packages in README files ([#12136](https://github.com/firebase/flutterfire/issues/12136)). ([24b9ac7e](https://github.com/firebase/flutterfire/commit/24b9ac7ec29fc9ca466c0941c2cff26d75b8568d))
+
+## 3.5.18
+
+ - Update a dependency to the latest release.
+
+## 3.5.17
+
+ - Update a dependency to the latest release.
+
+## 3.5.16
+
+ - **FIX**(messaging): fix an issue where Service Worker would not register in time ([#11979](https://github.com/firebase/flutterfire/issues/11979)). ([4752efb6](https://github.com/firebase/flutterfire/commit/4752efb6dba0634c1f60e68ac8ae6d3fdcaa83ea))
+
+## 3.5.15
+
+ - Update a dependency to the latest release.
+
+## 3.5.14
+
+ - Update a dependency to the latest release.
+
 ## 3.5.13
 
  - Update a dependency to the latest release.

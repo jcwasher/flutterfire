@@ -1,3 +1,43 @@
+## 3.4.14
+
+ - Update a dependency to the latest release.
+
+## 3.4.13
+
+ - Update a dependency to the latest release.
+
+## 3.4.12
+
+ - Update a dependency to the latest release.
+
+## 3.4.11
+
+ - Update a dependency to the latest release.
+
+## 3.4.10
+
+ - Update a dependency to the latest release.
+
+## 3.4.9
+
+ - **FIX**(crashlytics): update exception `reason` to ensure it does not produce incorrect value in Firebase console ([#12053](https://github.com/firebase/flutterfire/issues/12053)). ([1cf38b86](https://github.com/firebase/flutterfire/commit/1cf38b86e640d0b64dcc8614b04d870478067b84))
+
+## 3.4.8
+
+ - Update a dependency to the latest release.
+
+## 3.4.7
+
+ - Update a dependency to the latest release.
+
+## 3.4.6
+
+ - Update a dependency to the latest release.
+
+## 3.4.5
+
+ - Update a dependency to the latest release.
+
 ## 3.4.4
 
  - Update a dependency to the latest release.

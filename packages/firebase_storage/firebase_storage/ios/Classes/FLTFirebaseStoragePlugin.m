@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, FLTFirebaseStorageStringType) {
 @implementation FLTFirebaseStoragePlugin {
   NSMutableDictionary<NSNumber *, FIRStorageObservableTask<FIRStorageTaskManagement> *> *_tasks;
   dispatch_queue_t _callbackQueue;
-  bool hasEmulatorBooted;
+  NSMutableDictionary<NSString *, NSNumber *> *_emulatorBooted;
   NSObject<FlutterBinaryMessenger> *_binaryMessenger;
   NSMutableDictionary<NSString *, FlutterEventChannel *> *_eventChannels;
   NSMutableDictionary<NSString *, NSObject<FlutterStreamHandler> *> *_streamHandlers;
@@ -97,7 +97,7 @@ typedef NS_ENUM(NSUInteger, FLTFirebaseStorageStringType) {
         dictionary];
     _callbackQueue =
         dispatch_queue_create("io.flutter.plugins.firebase.storage", DISPATCH_QUEUE_SERIAL);
-    hasEmulatorBooted = false;
+    _emulatorBooted = [[NSMutableDictionary alloc] init];
     _binaryMessenger = messenger;
     _eventChannels = [NSMutableDictionary dictionary];
     _streamHandlers = [NSMutableDictionary dictionary];
@@ -242,7 +242,12 @@ typedef NS_ENUM(NSUInteger, FLTFirebaseStorageStringType) {
                          port:(NSNumber *)port
                    completion:(void (^)(FlutterError *_Nullable))completion {
   FIRStorage *storage = [self getFIRStorageFromAppNameFromPigeon:app];
-  [storage useEmulatorWithHost:host port:[port integerValue]];
+  NSNumber *emulatorKey = _emulatorBooted[app.bucket];
+
+  if (emulatorKey == nil) {
+    [storage useEmulatorWithHost:host port:[port integerValue]];
+    [_emulatorBooted setObject:@(YES) forKey:app.bucket];
+  }
   completion(nil);
 }
 
@@ -707,7 +712,7 @@ typedef NS_ENUM(NSUInteger, FLTFirebaseStorageStringType) {
   completion(NO, nil);
 }
 
-- (NSDictionary *)NSDictionaryFromNSError:(NSError *)error {
++ (NSDictionary *)NSDictionaryFromNSError:(NSError *)error {
   NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
   NSString *code = @"unknown";
   NSString *message = [error localizedDescription];
@@ -760,7 +765,7 @@ typedef NS_ENUM(NSUInteger, FLTFirebaseStorageStringType) {
   if (error == nil) {
     return nil;
   }
-  NSDictionary *dictionary = [self NSDictionaryFromNSError:error];
+  NSDictionary *dictionary = [FLTFirebaseStoragePlugin NSDictionaryFromNSError:error];
   return [FlutterError errorWithCode:dictionary[@"code"]
                              message:dictionary[@"message"]
                              details:@{}];
@@ -774,7 +779,7 @@ typedef NS_ENUM(NSUInteger, FLTFirebaseStorageStringType) {
       [FLTFirebasePlugin firebaseAppNameFromIosName:snapshot.reference.storage.app.name];
   dictionary[kFLTFirebaseStorageKeyBucket] = snapshot.reference.bucket;
   if (snapshot.error != nil) {
-    dictionary[@"error"] = [self NSDictionaryFromNSError:snapshot.error];
+    dictionary[@"error"] = [FLTFirebaseStoragePlugin NSDictionaryFromNSError:snapshot.error];
   } else {
     dictionary[kFLTFirebaseStorageKeySnapshot] =
         [FLTFirebaseStoragePlugin parseTaskSnapshot:snapshot];
