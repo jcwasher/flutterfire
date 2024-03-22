@@ -1,3 +1,24 @@
+## 3.8.0
+
+ - **FEAT**: update `web` package to 0.5.1 ([#12469](https://github.com/firebase/flutterfire/issues/12469)). ([f5c4354a](https://github.com/firebase/flutterfire/commit/f5c4354a66377da9d231c5e3fc7e955ddb7ef8cf))
+
+## 3.7.3
+
+ - Update a dependency to the latest release.
+
+## 3.7.2
+
+ - Update a dependency to the latest release.
+
+## 3.7.1
+
+ - Update a dependency to the latest release.
+
+## 3.7.0
+
+ - **FIX**(storage,web): fixed web stream handlers, e2e web tests, incorrect NativeError being thrown instead of FirebaseException on web ([#12319](https://github.com/firebase/flutterfire/issues/12319)). ([d32b5a93](https://github.com/firebase/flutterfire/commit/d32b5a936cfb05fbeeff199248474c23af293a3c))
+ - **FEAT**(storage,web): migrate web to js_interop to be compatible with WASM ([#12202](https://github.com/firebase/flutterfire/issues/12202)). ([7cae803a](https://github.com/firebase/flutterfire/commit/7cae803a3f5e146cd53b2a313b61417a12de52dc))
+
 ## 3.6.22
 
  - Update a dependency to the latest release.
